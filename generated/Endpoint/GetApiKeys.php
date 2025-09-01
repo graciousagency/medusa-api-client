@@ -1,0 +1,117 @@
+<?php
+
+namespace Gracious\MedusaApiClientBundle\Endpoint;
+
+class GetApiKeys extends \Gracious\MedusaApiClientBundle\Runtime\Client\BaseEndpoint implements \Gracious\MedusaApiClientBundle\Runtime\Client\Endpoint
+{
+    protected $accept;
+    /**
+     * Retrieve a list of API keys. The API keys can be filtered by fields such as `id`. The API keys can also be sorted or paginated.
+     *
+     * @param array $queryParameters {
+     *     @var string $fields Comma-separated fields that should be included in the returned data. if a field is prefixed with `+` it will be added to the default fields, using `-` will remove it from the default fields. without prefix it will replace the entire default fields.
+     *     @var float $offset The number of items to skip when retrieving a list.
+     *     @var float $limit Limit the number of items returned in the list.
+     *     @var string $order The field to sort the data by. By default, the sort order is ascending. To change the order to descending, prefix the field name with `-`.
+     *     @var string $q A search term to search the API keys' searchable properties.
+     *     @var string $id 
+     *     @var string $title 
+     *     @var string $token 
+     *     @var string $type Filter by the API key's type.
+     *     @var string $created_at Filter by the API key's creation date.
+     *     @var string $updated_at Filter by the API key's update date.
+     *     @var string $deleted_at Filter by the API key's deletion date.
+     *     @var string $revoked_at Filter by the API key's revoke date.
+     *     @var array $$and Join query parameters with an AND condition. Each object's content is the same type as the expected query parameters.
+     *     @var array $$or Join query parameters with an OR condition. Each object's content is the same type as the expected query parameters.
+     *     @var bool $with_deleted Whether to include deleted records in the result.
+     * }
+     * @param array $accept Accept content header application/json|text/plain
+     */
+    public function __construct(array $queryParameters = [], array $accept = [])
+    {
+        $this->queryParameters = $queryParameters;
+        $this->accept = $accept;
+    }
+    use \Gracious\MedusaApiClientBundle\Runtime\Client\EndpointTrait;
+    public function getMethod(): string
+    {
+        return 'GET';
+    }
+    public function getUri(): string
+    {
+        return '/admin/api-keys';
+    }
+    public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
+    {
+        return [[], null];
+    }
+    public function getExtraHeaders(): array
+    {
+        if (empty($this->accept)) {
+            return ['Accept' => ['application/json', 'text/plain']];
+        }
+        return $this->accept;
+    }
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
+    {
+        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver->setDefined(['fields', 'offset', 'limit', 'order', 'q', 'id', 'title', 'token', 'type', 'created_at', 'updated_at', 'deleted_at', 'revoked_at', '$and', '$or', 'with_deleted']);
+        $optionsResolver->setRequired([]);
+        $optionsResolver->setDefaults([]);
+        $optionsResolver->addAllowedTypes('fields', ['string']);
+        $optionsResolver->addAllowedTypes('offset', ['float']);
+        $optionsResolver->addAllowedTypes('limit', ['float']);
+        $optionsResolver->addAllowedTypes('order', ['string']);
+        $optionsResolver->addAllowedTypes('q', ['string']);
+        $optionsResolver->addAllowedTypes('type', ['string']);
+        $optionsResolver->addAllowedTypes('created_at', ['string']);
+        $optionsResolver->addAllowedTypes('updated_at', ['string']);
+        $optionsResolver->addAllowedTypes('deleted_at', ['string']);
+        $optionsResolver->addAllowedTypes('revoked_at', ['string']);
+        $optionsResolver->addAllowedTypes('$and', ['array']);
+        $optionsResolver->addAllowedTypes('$or', ['array']);
+        $optionsResolver->addAllowedTypes('with_deleted', ['bool']);
+        return $optionsResolver;
+    }
+    /**
+     * {@inheritdoc}
+     *
+     * @throws \Gracious\MedusaApiClientBundle\Exception\GetApiKeysBadRequestException
+     * @throws \Gracious\MedusaApiClientBundle\Exception\GetApiKeysNotFoundException
+     * @throws \Gracious\MedusaApiClientBundle\Exception\GetApiKeysConflictException
+     * @throws \Gracious\MedusaApiClientBundle\Exception\GetApiKeysUnprocessableEntityException
+     * @throws \Gracious\MedusaApiClientBundle\Exception\GetApiKeysInternalServerErrorException
+     *
+     * @return null|\Gracious\MedusaApiClientBundle\Model\AdminApiKeysGetResponse200
+     */
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, 'Gracious\MedusaApiClientBundle\Model\AdminApiKeysGetResponse200', 'json');
+        }
+        if (is_null($contentType) === false && (400 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Gracious\MedusaApiClientBundle\Exception\GetApiKeysBadRequestException($serializer->deserialize($body, 'Gracious\MedusaApiClientBundle\Model\Error', 'json'), $response);
+        }
+        if (401 === $status) {
+        }
+        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Gracious\MedusaApiClientBundle\Exception\GetApiKeysNotFoundException($serializer->deserialize($body, 'Gracious\MedusaApiClientBundle\Model\Error', 'json'), $response);
+        }
+        if (is_null($contentType) === false && (409 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Gracious\MedusaApiClientBundle\Exception\GetApiKeysConflictException($serializer->deserialize($body, 'Gracious\MedusaApiClientBundle\Model\Error', 'json'), $response);
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Gracious\MedusaApiClientBundle\Exception\GetApiKeysUnprocessableEntityException($serializer->deserialize($body, 'Gracious\MedusaApiClientBundle\Model\Error', 'json'), $response);
+        }
+        if (is_null($contentType) === false && (500 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \Gracious\MedusaApiClientBundle\Exception\GetApiKeysInternalServerErrorException($serializer->deserialize($body, 'Gracious\MedusaApiClientBundle\Model\Error', 'json'), $response);
+        }
+    }
+    public function getAuthenticationScopes(): array
+    {
+        return ['api_token', 'cookie_auth', 'jwt_token'];
+    }
+}

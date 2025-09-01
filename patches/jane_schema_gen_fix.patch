@@ -1,0 +1,16 @@
+Index: vendor/jane-php/open-api-3/Generator/Parameter/NonBodyParameterGenerator.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/vendor/jane-php/open-api-3/Generator/Parameter/NonBodyParameterGenerator.php b/vendor/jane-php/open-api-3/Generator/Parameter/NonBodyParameterGenerator.php
+--- a/vendor/jane-php/open-api-3/Generator/Parameter/NonBodyParameterGenerator.php
++++ b/vendor/jane-php/open-api-3/Generator/Parameter/NonBodyParameterGenerator.php	(date 1756286243051)
+@@ -194,6 +194,6 @@
+             'file' => ['string', 'resource', '\\' . StreamInterface::class],
+         ];
+ 
+-        return $convertArray[$type];
++        return $convertArray[$type] ?? ['string'];
+     }
+ }

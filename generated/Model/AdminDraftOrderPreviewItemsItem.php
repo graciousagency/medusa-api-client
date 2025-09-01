@@ -1,0 +1,1247 @@
+<?php
+
+namespace Gracious\MedusaApiClientBundle\Model;
+
+class AdminDraftOrderPreviewItemsItem extends \ArrayObject
+{
+    /**
+     * @var array
+     */
+    protected $initialized = [];
+    public function isInitialized($property): bool
+    {
+        return array_key_exists($property, $this->initialized);
+    }
+    /**
+     * The item's ID.
+     *
+     * @var string|null
+     */
+    protected $id;
+    /**
+     * The item's title.
+     *
+     * @var string|null
+     */
+    protected $title;
+    /**
+     * The item's subtitle.
+     *
+     * @var string|null
+     */
+    protected $subtitle;
+    /**
+     * The URL of the item's thumbnail.
+     *
+     * @var string|null
+     */
+    protected $thumbnail;
+    /**
+     * The product variant's details.
+     *
+     * @var BaseProductVariant|null
+     */
+    protected $variant;
+    /**
+     * The ID of the associated variant.
+     *
+     * @var string|null
+     */
+    protected $variantId;
+    /**
+     * The product's details.
+     *
+     * @var AdminProduct|null
+     */
+    protected $product;
+    /**
+     * The ID of the associated product.
+     *
+     * @var string|null
+     */
+    protected $productId;
+    /**
+     * The title of the item's product.
+     *
+     * @var string|null
+     */
+    protected $productTitle;
+    /**
+     * The description of the item's product.
+     *
+     * @var string|null
+     */
+    protected $productDescription;
+    /**
+     * The subtitle of the item's product.
+     *
+     * @var string|null
+     */
+    protected $productSubtitle;
+    /**
+     * The ID of type of the item's product.
+     *
+     * @var string|null
+     */
+    protected $productType;
+    /**
+     * The ID of collection of the item's product.
+     *
+     * @var string|null
+     */
+    protected $productCollection;
+    /**
+     * The handle of the item's product.
+     *
+     * @var string|null
+     */
+    protected $productHandle;
+    /**
+     * The SKU of the item's variant.
+     *
+     * @var string|null
+     */
+    protected $variantSku;
+    /**
+     * The barcode of the item's variant.
+     *
+     * @var string|null
+     */
+    protected $variantBarcode;
+    /**
+     * The title of the item's variant.
+     *
+     * @var string|null
+     */
+    protected $variantTitle;
+    /**
+     * The option values of the item's variant as key-value pairs. The key is the title of an option, and the value is the option's value.
+     *
+     * @var array<string, mixed>|null
+     */
+    protected $variantOptionValues;
+    /**
+     * Whether the item requires shipping.
+     *
+     * @var bool|null
+     */
+    protected $requiresShipping;
+    /**
+     * Whether the item is discountable.
+     *
+     * @var bool|null
+     */
+    protected $isDiscountable;
+    /**
+     * Whether the item's price includes taxes.
+     *
+     * @var bool|null
+     */
+    protected $isTaxInclusive;
+    /**
+     * The original price of the item before a promotion or sale.
+     *
+     * @var float|null
+     */
+    protected $compareAtUnitPrice;
+    /**
+     * The item's unit price.
+     *
+     * @var float|null
+     */
+    protected $unitPrice;
+    /**
+     * The item's quantity.
+     *
+     * @var float|null
+     */
+    protected $quantity;
+    /**
+     * The item's tax lines.
+     *
+     * @var list<BaseOrderLineItemTaxLine>|null
+     */
+    protected $taxLines;
+    /**
+     * The item's adjustments.
+     *
+     * @var list<BaseOrderLineItemAdjustment>|null
+     */
+    protected $adjustments;
+    /**
+     * The item's detail.
+     *
+     * @var BaseOrderItemDetail|null
+     */
+    protected $detail;
+    /**
+     * The date the item was created.
+     *
+     * @var \DateTime|null
+     */
+    protected $createdAt;
+    /**
+     * The date the item was updated.
+     *
+     * @var \DateTime|null
+     */
+    protected $updatedAt;
+    /**
+     * The item's metadata, can hold custom key-value pairs.
+     *
+     * @var array<string, mixed>|null
+     */
+    protected $metadata;
+    /**
+     * The item's total including taxes, excluding promotions.
+     *
+     * @var float|null
+     */
+    protected $originalTotal;
+    /**
+     * The item's total excluding taxes, including promotions.
+     *
+     * @var float|null
+     */
+    protected $originalSubtotal;
+    /**
+     * The tax total of the item excluding promotions.
+     *
+     * @var float|null
+     */
+    protected $originalTaxTotal;
+    /**
+     * The item's total for a single unit including taxes and promotions.
+     *
+     * @var float|null
+     */
+    protected $itemTotal;
+    /**
+     * The item's total for a single unit excluding taxes, including promotions.
+     *
+     * @var float|null
+     */
+    protected $itemSubtotal;
+    /**
+     * The tax total for a single unit of the item including promotions.
+     *
+     * @var float|null
+     */
+    protected $itemTaxTotal;
+    /**
+     * The item's total including taxes and promotions.
+     *
+     * @var float|null
+     */
+    protected $total;
+    /**
+     * The item's total excluding taxes, including promotions.
+     *
+     * @var float|null
+     */
+    protected $subtotal;
+    /**
+     * The tax total of the item including promotions.
+     *
+     * @var float|null
+     */
+    protected $taxTotal;
+    /**
+     * The total of the item's discount / promotion.
+     *
+     * @var float|null
+     */
+    protected $discountTotal;
+    /**
+     * The tax total of the item's discount / promotion
+     *
+     * @var float|null
+     */
+    protected $discountTaxTotal;
+    /**
+     * The total refundable amount of the item's total.
+     *
+     * @var float|null
+     */
+    protected $refundableTotal;
+    /**
+     * The total refundable amount of the item's total for a single unit.
+     *
+     * @var float|null
+     */
+    protected $refundableTotalPerUnit;
+    /**
+     * The actions applied on an item.
+     *
+     * @var list<array<string, mixed>>|null
+     */
+    protected $actions;
+    /**
+     * The item's ID.
+     *
+     * @return string|null
+     */
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
+    /**
+     * The item's ID.
+     *
+     * @param string|null $id
+     *
+     * @return self
+     */
+    public function setId(?string $id): self
+    {
+        $this->initialized['id'] = true;
+        $this->id = $id;
+        return $this;
+    }
+    /**
+     * The item's title.
+     *
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+    /**
+     * The item's title.
+     *
+     * @param string|null $title
+     *
+     * @return self
+     */
+    public function setTitle(?string $title): self
+    {
+        $this->initialized['title'] = true;
+        $this->title = $title;
+        return $this;
+    }
+    /**
+     * The item's subtitle.
+     *
+     * @return string|null
+     */
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+    /**
+     * The item's subtitle.
+     *
+     * @param string|null $subtitle
+     *
+     * @return self
+     */
+    public function setSubtitle(?string $subtitle): self
+    {
+        $this->initialized['subtitle'] = true;
+        $this->subtitle = $subtitle;
+        return $this;
+    }
+    /**
+     * The URL of the item's thumbnail.
+     *
+     * @return string|null
+     */
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+    /**
+     * The URL of the item's thumbnail.
+     *
+     * @param string|null $thumbnail
+     *
+     * @return self
+     */
+    public function setThumbnail(?string $thumbnail): self
+    {
+        $this->initialized['thumbnail'] = true;
+        $this->thumbnail = $thumbnail;
+        return $this;
+    }
+    /**
+     * The product variant's details.
+     *
+     * @return BaseProductVariant|null
+     */
+    public function getVariant(): ?BaseProductVariant
+    {
+        return $this->variant;
+    }
+    /**
+     * The product variant's details.
+     *
+     * @param BaseProductVariant|null $variant
+     *
+     * @return self
+     */
+    public function setVariant(?BaseProductVariant $variant): self
+    {
+        $this->initialized['variant'] = true;
+        $this->variant = $variant;
+        return $this;
+    }
+    /**
+     * The ID of the associated variant.
+     *
+     * @return string|null
+     */
+    public function getVariantId(): ?string
+    {
+        return $this->variantId;
+    }
+    /**
+     * The ID of the associated variant.
+     *
+     * @param string|null $variantId
+     *
+     * @return self
+     */
+    public function setVariantId(?string $variantId): self
+    {
+        $this->initialized['variantId'] = true;
+        $this->variantId = $variantId;
+        return $this;
+    }
+    /**
+     * The product's details.
+     *
+     * @return AdminProduct|null
+     */
+    public function getProduct(): ?AdminProduct
+    {
+        return $this->product;
+    }
+    /**
+     * The product's details.
+     *
+     * @param AdminProduct|null $product
+     *
+     * @return self
+     */
+    public function setProduct(?AdminProduct $product): self
+    {
+        $this->initialized['product'] = true;
+        $this->product = $product;
+        return $this;
+    }
+    /**
+     * The ID of the associated product.
+     *
+     * @return string|null
+     */
+    public function getProductId(): ?string
+    {
+        return $this->productId;
+    }
+    /**
+     * The ID of the associated product.
+     *
+     * @param string|null $productId
+     *
+     * @return self
+     */
+    public function setProductId(?string $productId): self
+    {
+        $this->initialized['productId'] = true;
+        $this->productId = $productId;
+        return $this;
+    }
+    /**
+     * The title of the item's product.
+     *
+     * @return string|null
+     */
+    public function getProductTitle(): ?string
+    {
+        return $this->productTitle;
+    }
+    /**
+     * The title of the item's product.
+     *
+     * @param string|null $productTitle
+     *
+     * @return self
+     */
+    public function setProductTitle(?string $productTitle): self
+    {
+        $this->initialized['productTitle'] = true;
+        $this->productTitle = $productTitle;
+        return $this;
+    }
+    /**
+     * The description of the item's product.
+     *
+     * @return string|null
+     */
+    public function getProductDescription(): ?string
+    {
+        return $this->productDescription;
+    }
+    /**
+     * The description of the item's product.
+     *
+     * @param string|null $productDescription
+     *
+     * @return self
+     */
+    public function setProductDescription(?string $productDescription): self
+    {
+        $this->initialized['productDescription'] = true;
+        $this->productDescription = $productDescription;
+        return $this;
+    }
+    /**
+     * The subtitle of the item's product.
+     *
+     * @return string|null
+     */
+    public function getProductSubtitle(): ?string
+    {
+        return $this->productSubtitle;
+    }
+    /**
+     * The subtitle of the item's product.
+     *
+     * @param string|null $productSubtitle
+     *
+     * @return self
+     */
+    public function setProductSubtitle(?string $productSubtitle): self
+    {
+        $this->initialized['productSubtitle'] = true;
+        $this->productSubtitle = $productSubtitle;
+        return $this;
+    }
+    /**
+     * The ID of type of the item's product.
+     *
+     * @return string|null
+     */
+    public function getProductType(): ?string
+    {
+        return $this->productType;
+    }
+    /**
+     * The ID of type of the item's product.
+     *
+     * @param string|null $productType
+     *
+     * @return self
+     */
+    public function setProductType(?string $productType): self
+    {
+        $this->initialized['productType'] = true;
+        $this->productType = $productType;
+        return $this;
+    }
+    /**
+     * The ID of collection of the item's product.
+     *
+     * @return string|null
+     */
+    public function getProductCollection(): ?string
+    {
+        return $this->productCollection;
+    }
+    /**
+     * The ID of collection of the item's product.
+     *
+     * @param string|null $productCollection
+     *
+     * @return self
+     */
+    public function setProductCollection(?string $productCollection): self
+    {
+        $this->initialized['productCollection'] = true;
+        $this->productCollection = $productCollection;
+        return $this;
+    }
+    /**
+     * The handle of the item's product.
+     *
+     * @return string|null
+     */
+    public function getProductHandle(): ?string
+    {
+        return $this->productHandle;
+    }
+    /**
+     * The handle of the item's product.
+     *
+     * @param string|null $productHandle
+     *
+     * @return self
+     */
+    public function setProductHandle(?string $productHandle): self
+    {
+        $this->initialized['productHandle'] = true;
+        $this->productHandle = $productHandle;
+        return $this;
+    }
+    /**
+     * The SKU of the item's variant.
+     *
+     * @return string|null
+     */
+    public function getVariantSku(): ?string
+    {
+        return $this->variantSku;
+    }
+    /**
+     * The SKU of the item's variant.
+     *
+     * @param string|null $variantSku
+     *
+     * @return self
+     */
+    public function setVariantSku(?string $variantSku): self
+    {
+        $this->initialized['variantSku'] = true;
+        $this->variantSku = $variantSku;
+        return $this;
+    }
+    /**
+     * The barcode of the item's variant.
+     *
+     * @return string|null
+     */
+    public function getVariantBarcode(): ?string
+    {
+        return $this->variantBarcode;
+    }
+    /**
+     * The barcode of the item's variant.
+     *
+     * @param string|null $variantBarcode
+     *
+     * @return self
+     */
+    public function setVariantBarcode(?string $variantBarcode): self
+    {
+        $this->initialized['variantBarcode'] = true;
+        $this->variantBarcode = $variantBarcode;
+        return $this;
+    }
+    /**
+     * The title of the item's variant.
+     *
+     * @return string|null
+     */
+    public function getVariantTitle(): ?string
+    {
+        return $this->variantTitle;
+    }
+    /**
+     * The title of the item's variant.
+     *
+     * @param string|null $variantTitle
+     *
+     * @return self
+     */
+    public function setVariantTitle(?string $variantTitle): self
+    {
+        $this->initialized['variantTitle'] = true;
+        $this->variantTitle = $variantTitle;
+        return $this;
+    }
+    /**
+     * The option values of the item's variant as key-value pairs. The key is the title of an option, and the value is the option's value.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function getVariantOptionValues(): ?iterable
+    {
+        return $this->variantOptionValues;
+    }
+    /**
+     * The option values of the item's variant as key-value pairs. The key is the title of an option, and the value is the option's value.
+     *
+     * @param array<string, mixed>|null $variantOptionValues
+     *
+     * @return self
+     */
+    public function setVariantOptionValues(?iterable $variantOptionValues): self
+    {
+        $this->initialized['variantOptionValues'] = true;
+        $this->variantOptionValues = $variantOptionValues;
+        return $this;
+    }
+    /**
+     * Whether the item requires shipping.
+     *
+     * @return bool|null
+     */
+    public function getRequiresShipping(): ?bool
+    {
+        return $this->requiresShipping;
+    }
+    /**
+     * Whether the item requires shipping.
+     *
+     * @param bool|null $requiresShipping
+     *
+     * @return self
+     */
+    public function setRequiresShipping(?bool $requiresShipping): self
+    {
+        $this->initialized['requiresShipping'] = true;
+        $this->requiresShipping = $requiresShipping;
+        return $this;
+    }
+    /**
+     * Whether the item is discountable.
+     *
+     * @return bool|null
+     */
+    public function getIsDiscountable(): ?bool
+    {
+        return $this->isDiscountable;
+    }
+    /**
+     * Whether the item is discountable.
+     *
+     * @param bool|null $isDiscountable
+     *
+     * @return self
+     */
+    public function setIsDiscountable(?bool $isDiscountable): self
+    {
+        $this->initialized['isDiscountable'] = true;
+        $this->isDiscountable = $isDiscountable;
+        return $this;
+    }
+    /**
+     * Whether the item's price includes taxes.
+     *
+     * @return bool|null
+     */
+    public function getIsTaxInclusive(): ?bool
+    {
+        return $this->isTaxInclusive;
+    }
+    /**
+     * Whether the item's price includes taxes.
+     *
+     * @param bool|null $isTaxInclusive
+     *
+     * @return self
+     */
+    public function setIsTaxInclusive(?bool $isTaxInclusive): self
+    {
+        $this->initialized['isTaxInclusive'] = true;
+        $this->isTaxInclusive = $isTaxInclusive;
+        return $this;
+    }
+    /**
+     * The original price of the item before a promotion or sale.
+     *
+     * @return float|null
+     */
+    public function getCompareAtUnitPrice(): ?float
+    {
+        return $this->compareAtUnitPrice;
+    }
+    /**
+     * The original price of the item before a promotion or sale.
+     *
+     * @param float|null $compareAtUnitPrice
+     *
+     * @return self
+     */
+    public function setCompareAtUnitPrice(?float $compareAtUnitPrice): self
+    {
+        $this->initialized['compareAtUnitPrice'] = true;
+        $this->compareAtUnitPrice = $compareAtUnitPrice;
+        return $this;
+    }
+    /**
+     * The item's unit price.
+     *
+     * @return float|null
+     */
+    public function getUnitPrice(): ?float
+    {
+        return $this->unitPrice;
+    }
+    /**
+     * The item's unit price.
+     *
+     * @param float|null $unitPrice
+     *
+     * @return self
+     */
+    public function setUnitPrice(?float $unitPrice): self
+    {
+        $this->initialized['unitPrice'] = true;
+        $this->unitPrice = $unitPrice;
+        return $this;
+    }
+    /**
+     * The item's quantity.
+     *
+     * @return float|null
+     */
+    public function getQuantity(): ?float
+    {
+        return $this->quantity;
+    }
+    /**
+     * The item's quantity.
+     *
+     * @param float|null $quantity
+     *
+     * @return self
+     */
+    public function setQuantity(?float $quantity): self
+    {
+        $this->initialized['quantity'] = true;
+        $this->quantity = $quantity;
+        return $this;
+    }
+    /**
+     * The item's tax lines.
+     *
+     * @return list<BaseOrderLineItemTaxLine>|null
+     */
+    public function getTaxLines(): ?array
+    {
+        return $this->taxLines;
+    }
+    /**
+     * The item's tax lines.
+     *
+     * @param list<BaseOrderLineItemTaxLine>|null $taxLines
+     *
+     * @return self
+     */
+    public function setTaxLines(?array $taxLines): self
+    {
+        $this->initialized['taxLines'] = true;
+        $this->taxLines = $taxLines;
+        return $this;
+    }
+    /**
+     * The item's adjustments.
+     *
+     * @return list<BaseOrderLineItemAdjustment>|null
+     */
+    public function getAdjustments(): ?array
+    {
+        return $this->adjustments;
+    }
+    /**
+     * The item's adjustments.
+     *
+     * @param list<BaseOrderLineItemAdjustment>|null $adjustments
+     *
+     * @return self
+     */
+    public function setAdjustments(?array $adjustments): self
+    {
+        $this->initialized['adjustments'] = true;
+        $this->adjustments = $adjustments;
+        return $this;
+    }
+    /**
+     * The item's detail.
+     *
+     * @return BaseOrderItemDetail|null
+     */
+    public function getDetail(): ?BaseOrderItemDetail
+    {
+        return $this->detail;
+    }
+    /**
+     * The item's detail.
+     *
+     * @param BaseOrderItemDetail|null $detail
+     *
+     * @return self
+     */
+    public function setDetail(?BaseOrderItemDetail $detail): self
+    {
+        $this->initialized['detail'] = true;
+        $this->detail = $detail;
+        return $this;
+    }
+    /**
+     * The date the item was created.
+     *
+     * @return \DateTime|null
+     */
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+    /**
+     * The date the item was created.
+     *
+     * @param \DateTime|null $createdAt
+     *
+     * @return self
+     */
+    public function setCreatedAt(?\DateTime $createdAt): self
+    {
+        $this->initialized['createdAt'] = true;
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+    /**
+     * The date the item was updated.
+     *
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt(): ?\DateTime
+    {
+        return $this->updatedAt;
+    }
+    /**
+     * The date the item was updated.
+     *
+     * @param \DateTime|null $updatedAt
+     *
+     * @return self
+     */
+    public function setUpdatedAt(?\DateTime $updatedAt): self
+    {
+        $this->initialized['updatedAt'] = true;
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+    /**
+     * The item's metadata, can hold custom key-value pairs.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function getMetadata(): ?iterable
+    {
+        return $this->metadata;
+    }
+    /**
+     * The item's metadata, can hold custom key-value pairs.
+     *
+     * @param array<string, mixed>|null $metadata
+     *
+     * @return self
+     */
+    public function setMetadata(?iterable $metadata): self
+    {
+        $this->initialized['metadata'] = true;
+        $this->metadata = $metadata;
+        return $this;
+    }
+    /**
+     * The item's total including taxes, excluding promotions.
+     *
+     * @return float|null
+     */
+    public function getOriginalTotal(): ?float
+    {
+        return $this->originalTotal;
+    }
+    /**
+     * The item's total including taxes, excluding promotions.
+     *
+     * @param float|null $originalTotal
+     *
+     * @return self
+     */
+    public function setOriginalTotal(?float $originalTotal): self
+    {
+        $this->initialized['originalTotal'] = true;
+        $this->originalTotal = $originalTotal;
+        return $this;
+    }
+    /**
+     * The item's total excluding taxes, including promotions.
+     *
+     * @return float|null
+     */
+    public function getOriginalSubtotal(): ?float
+    {
+        return $this->originalSubtotal;
+    }
+    /**
+     * The item's total excluding taxes, including promotions.
+     *
+     * @param float|null $originalSubtotal
+     *
+     * @return self
+     */
+    public function setOriginalSubtotal(?float $originalSubtotal): self
+    {
+        $this->initialized['originalSubtotal'] = true;
+        $this->originalSubtotal = $originalSubtotal;
+        return $this;
+    }
+    /**
+     * The tax total of the item excluding promotions.
+     *
+     * @return float|null
+     */
+    public function getOriginalTaxTotal(): ?float
+    {
+        return $this->originalTaxTotal;
+    }
+    /**
+     * The tax total of the item excluding promotions.
+     *
+     * @param float|null $originalTaxTotal
+     *
+     * @return self
+     */
+    public function setOriginalTaxTotal(?float $originalTaxTotal): self
+    {
+        $this->initialized['originalTaxTotal'] = true;
+        $this->originalTaxTotal = $originalTaxTotal;
+        return $this;
+    }
+    /**
+     * The item's total for a single unit including taxes and promotions.
+     *
+     * @return float|null
+     */
+    public function getItemTotal(): ?float
+    {
+        return $this->itemTotal;
+    }
+    /**
+     * The item's total for a single unit including taxes and promotions.
+     *
+     * @param float|null $itemTotal
+     *
+     * @return self
+     */
+    public function setItemTotal(?float $itemTotal): self
+    {
+        $this->initialized['itemTotal'] = true;
+        $this->itemTotal = $itemTotal;
+        return $this;
+    }
+    /**
+     * The item's total for a single unit excluding taxes, including promotions.
+     *
+     * @return float|null
+     */
+    public function getItemSubtotal(): ?float
+    {
+        return $this->itemSubtotal;
+    }
+    /**
+     * The item's total for a single unit excluding taxes, including promotions.
+     *
+     * @param float|null $itemSubtotal
+     *
+     * @return self
+     */
+    public function setItemSubtotal(?float $itemSubtotal): self
+    {
+        $this->initialized['itemSubtotal'] = true;
+        $this->itemSubtotal = $itemSubtotal;
+        return $this;
+    }
+    /**
+     * The tax total for a single unit of the item including promotions.
+     *
+     * @return float|null
+     */
+    public function getItemTaxTotal(): ?float
+    {
+        return $this->itemTaxTotal;
+    }
+    /**
+     * The tax total for a single unit of the item including promotions.
+     *
+     * @param float|null $itemTaxTotal
+     *
+     * @return self
+     */
+    public function setItemTaxTotal(?float $itemTaxTotal): self
+    {
+        $this->initialized['itemTaxTotal'] = true;
+        $this->itemTaxTotal = $itemTaxTotal;
+        return $this;
+    }
+    /**
+     * The item's total including taxes and promotions.
+     *
+     * @return float|null
+     */
+    public function getTotal(): ?float
+    {
+        return $this->total;
+    }
+    /**
+     * The item's total including taxes and promotions.
+     *
+     * @param float|null $total
+     *
+     * @return self
+     */
+    public function setTotal(?float $total): self
+    {
+        $this->initialized['total'] = true;
+        $this->total = $total;
+        return $this;
+    }
+    /**
+     * The item's total excluding taxes, including promotions.
+     *
+     * @return float|null
+     */
+    public function getSubtotal(): ?float
+    {
+        return $this->subtotal;
+    }
+    /**
+     * The item's total excluding taxes, including promotions.
+     *
+     * @param float|null $subtotal
+     *
+     * @return self
+     */
+    public function setSubtotal(?float $subtotal): self
+    {
+        $this->initialized['subtotal'] = true;
+        $this->subtotal = $subtotal;
+        return $this;
+    }
+    /**
+     * The tax total of the item including promotions.
+     *
+     * @return float|null
+     */
+    public function getTaxTotal(): ?float
+    {
+        return $this->taxTotal;
+    }
+    /**
+     * The tax total of the item including promotions.
+     *
+     * @param float|null $taxTotal
+     *
+     * @return self
+     */
+    public function setTaxTotal(?float $taxTotal): self
+    {
+        $this->initialized['taxTotal'] = true;
+        $this->taxTotal = $taxTotal;
+        return $this;
+    }
+    /**
+     * The total of the item's discount / promotion.
+     *
+     * @return float|null
+     */
+    public function getDiscountTotal(): ?float
+    {
+        return $this->discountTotal;
+    }
+    /**
+     * The total of the item's discount / promotion.
+     *
+     * @param float|null $discountTotal
+     *
+     * @return self
+     */
+    public function setDiscountTotal(?float $discountTotal): self
+    {
+        $this->initialized['discountTotal'] = true;
+        $this->discountTotal = $discountTotal;
+        return $this;
+    }
+    /**
+     * The tax total of the item's discount / promotion
+     *
+     * @return float|null
+     */
+    public function getDiscountTaxTotal(): ?float
+    {
+        return $this->discountTaxTotal;
+    }
+    /**
+     * The tax total of the item's discount / promotion
+     *
+     * @param float|null $discountTaxTotal
+     *
+     * @return self
+     */
+    public function setDiscountTaxTotal(?float $discountTaxTotal): self
+    {
+        $this->initialized['discountTaxTotal'] = true;
+        $this->discountTaxTotal = $discountTaxTotal;
+        return $this;
+    }
+    /**
+     * The total refundable amount of the item's total.
+     *
+     * @return float|null
+     */
+    public function getRefundableTotal(): ?float
+    {
+        return $this->refundableTotal;
+    }
+    /**
+     * The total refundable amount of the item's total.
+     *
+     * @param float|null $refundableTotal
+     *
+     * @return self
+     */
+    public function setRefundableTotal(?float $refundableTotal): self
+    {
+        $this->initialized['refundableTotal'] = true;
+        $this->refundableTotal = $refundableTotal;
+        return $this;
+    }
+    /**
+     * The total refundable amount of the item's total for a single unit.
+     *
+     * @return float|null
+     */
+    public function getRefundableTotalPerUnit(): ?float
+    {
+        return $this->refundableTotalPerUnit;
+    }
+    /**
+     * The total refundable amount of the item's total for a single unit.
+     *
+     * @param float|null $refundableTotalPerUnit
+     *
+     * @return self
+     */
+    public function setRefundableTotalPerUnit(?float $refundableTotalPerUnit): self
+    {
+        $this->initialized['refundableTotalPerUnit'] = true;
+        $this->refundableTotalPerUnit = $refundableTotalPerUnit;
+        return $this;
+    }
+    /**
+     * The actions applied on an item.
+     *
+     * @return list<array<string, mixed>>|null
+     */
+    public function getActions(): ?array
+    {
+        return $this->actions;
+    }
+    /**
+     * The actions applied on an item.
+     *
+     * @param list<array<string, mixed>>|null $actions
+     *
+     * @return self
+     */
+    public function setActions(?array $actions): self
+    {
+        $this->initialized['actions'] = true;
+        $this->actions = $actions;
+        return $this;
+    }
+}
